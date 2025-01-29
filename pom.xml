@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ai.hls-analyzer</groupId>
+    <artifactId>hls-analyzer</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>HLS analyzer via ChatGPT API</name>
+    <description>Analyzer for HLS streams via ChatGPT</description>
+    <url>https://github.com/serrss/hls-ai-analyzer</url>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git://github.com/serrss/hls-ai-analyzer.git</connection>
+        <developerConnection>scm:git:ssh://github.com:serrss/hls-ai-analyzer.git</developerConnection>
+        <url>https://github.com/serrss/hls-ai-analyzer</url>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/serrss/hls-ai-analyzer/issues</url>
+    </issueManagement>
+
+    <developers>
+        <developer>
+            <id>serrss</id>
+            <name>Serhii Romanov</name>
+            <email>sergey.romanov.kh@gmail.com</email>
+            <roles>
+                <role>Lead Developer</role>
+            </roles>
+            <organization>HLS Analyzer</organization>
+            <organizationUrl>https://github.com/serrss</organizationUrl>
+        </developer>
+    </developers>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>2.16.0</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- HTTP Client for downloading M3U8 -->
+        <dependency>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5-fluent</artifactId>
+            <version>5.4.1</version>
+        </dependency>
+
+        <!-- OpenAI API (New official SDK) -->
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-ai-openai</artifactId>
+            <version>1.0.0-beta.4</version>
+        </dependency>
+
+        <!-- Open M3U8 for parsing -->
+        <dependency>
+            <groupId>com.iheartradio.m3u8</groupId>
+            <artifactId>open-m3u8</artifactId>
+            <version>0.2.6</version>
+        </dependency>
+
+        <!-- Jackson (Managed by BOM) -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
