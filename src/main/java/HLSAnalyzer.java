@@ -9,8 +9,8 @@ public class HLSAnalyzer {
       System.out.println("M3U8 downloaded successfully!");
 
       System.out.println("Sending to ChatGPT for analysis...");
-      String response = ChatGPTClient.analyzeM3U8(m3u8Content);
-      System.out.println("ChatGPT Response: \n" + response);
+      String response = ChatGPTClient.analyzeM3U8(m3u8Content, streamUrl);
+      System.out.println("ChatGPT Response:\n" + response);
     } catch (Exception e) {
       e.printStackTrace();
     }
