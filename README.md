@@ -14,6 +14,7 @@ It follows **RFC-8216 (HLS standard)** to detect **errors and anomalies** in the
 
 - 📡 **Downloads `.m3u8` files** dynamically from a given URL.
 - 🔍 **Validates stream integrity** using **ChatGPT (GPT-3.5 Turbo)**.
+- 🛠️ Runs ffprobe on the .ts segment to verify stream properties.
 - ⚡ **Fast & Lightweight**, built with Java + Maven.
 - 🔐 **API Key Management** via `config.properties` or environment variables.
 - 📖 **Open Source** under **Apache License 2.0**.
@@ -66,6 +67,20 @@ export OPENAI_API_KEY="sk-your-api-key-here"
 ```
 
 (For Windows: use `set OPENAI_API_KEY="sk-your-api-key-here"` in CMD.)
+
+### 4️⃣ Install FFmpeg (Required for ffprobe)
+The tool requires ffprobe to analyze .ts media files.
+
+Install on macOS (via Homebrew):
+```sh
+brew install ffmpeg
+```
+Install on Ubuntu:
+```sh
+sudo apt update && sudo apt install ffmpeg
+```
+Install on Windows:
+Download from FFmpeg official site and add it to your system PATH.
 
 ---
 
