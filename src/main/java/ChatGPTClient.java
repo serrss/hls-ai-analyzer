@@ -33,21 +33,26 @@ public class ChatGPTClient {
       m3u8Url = variantPlaylistUrl;
     }
 
-    // Extract first TS segment
-    System.out.println("Extracting first .ts segment from M3U8...");
-    String tsUrl = extractFirstTsSegment(m3u8Content, m3u8Url);
-    if (tsUrl == null) {
-      throw new IllegalStateException("No .ts segment found in M3U8 playlist.");
+    // Extract all TS segments
+    System.out.println("Extracting all .ts segments from M3U8...");
+    List<String> tsUrls = extractAllTsSegments(m3u8Content, m3u8Url);
+    if (tsUrls.isEmpty()) {
+      throw new IllegalStateException("No .ts segments found in M3U8 playlist.");
     }
 
-    System.out.println("Downloading .ts segment: " + tsUrl);
-    File tsFile = downloadTsSegment(tsUrl);
-    System.out.println("Download complete: " + tsFile.getAbsolutePath());
+    StringBuilder ffprobeOutputs = new StringBuilder();
+    for (String tsUrl : tsUrls) {
+      System.out.println("Downloading .ts segment: " + tsUrl);
+      File tsFile = downloadTsSegment(tsUrl);
+      System.out.println("Download complete: " + tsFile.getAbsolutePath());
 
-    System.out.println("Running ffprobe on .ts segment...");
-    String ffprobeOutput = runFfprobe(tsFile);
-    System.out.println("FFprobe analysis complete.");
-    System.out.println("FFprobe output:\n" + ffprobeOutput);
+      System.out.println("Running ffprobe on .ts segment...");
+      String ffprobeOutput = runFfprobe(tsFile);
+      System.out.println("FFprobe analysis complete.");
+      System.out.println("FFprobe output:\n" + ffprobeOutput);
+
+      ffprobeOutputs.append("Segment URL: ").append(tsUrl).append("\n").append(ffprobeOutput).append("\n\n");
+    }
 
     // Custom Instructions for ChatGPT
     String customInstructions =
@@ -72,7 +77,7 @@ public class ChatGPTClient {
 
     Map<String, String> userMessage = new HashMap<>();
     userMessage.put("role", "user");
-    userMessage.put("content", "M3U8 Playlist:\n" + m3u8Content + "\n\nFFprobe Output:\n" + ffprobeOutput);
+    userMessage.put("content", "M3U8 Playlist:\n" + m3u8Content + "\n\nFFprobe Output:\n" + ffprobeOutputs);
     messages.add(userMessage);
 
     data.put("messages", messages);
@@ -124,6 +129,21 @@ public class ChatGPTClient {
       return tsSegment;
     }
     return null;
+  }
+
+  private static List<String> extractAllTsSegments(String m3u8Content, String m3u8Url) {
+    List<String> tsSegments = new ArrayList<>();
+    Pattern pattern = Pattern.compile("([^#][^\\s]+\\.ts)");
+    Matcher matcher = pattern.matcher(m3u8Content);
+
+    while (matcher.find()) {
+      String tsSegment = matcher.group(1);
+      if (!tsSegment.startsWith("http")) {
+        tsSegment = resolveM3U8Url(m3u8Url, tsSegment);
+      }
+      tsSegments.add(tsSegment);
+    }
+    return tsSegments;
   }
 
   private static String resolveM3U8Url(String m3u8Url, String relativePath) {
