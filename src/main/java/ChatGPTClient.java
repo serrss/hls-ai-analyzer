@@ -61,7 +61,7 @@ public class ChatGPTClient {
 
     // JSON payload for ChatGPT API
     Map<String, Object> data = new HashMap<>();
-    data.put("model", "gpt-3.5-turbo");
+    data.put("model", OpenAIModel.GPT_4_1_NANO.getModelName());
 
     List<Map<String, String>> messages = new ArrayList<>();
 
@@ -88,6 +88,12 @@ public class ChatGPTClient {
     conn.setRequestProperty("Authorization", "Bearer " + API_KEY);
     conn.setRequestProperty("Content-Type", "application/json");
     conn.setDoOutput(true);
+
+    //Identifying project ID
+    String projectId = ConfigLoader.getProjectId();
+    if (!projectId.isEmpty()) {
+      conn.setRequestProperty("OpenAI-Project", projectId);
+    }
 
     try (OutputStream os = conn.getOutputStream()) {
       os.write(jsonPayload.getBytes());
