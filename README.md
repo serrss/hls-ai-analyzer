@@ -5,32 +5,32 @@
 [![Maven](https://img.shields.io/badge/maven-build-blue.svg)](https://maven.apache.org/)
 [![OpenAI](https://img.shields.io/badge/openai-api-blue.svg)](https://platform.openai.com/docs/guides/authentication)
 
-## 📌 Overview
+## Overview
 
 **HLS Analyzer** is an **open-source tool** that fetches `.m3u8` files (HLS playlists), sends them to **ChatGPT**, and receives **analysis on stream integrity**.  
 It follows **RFC-8216 (HLS standard)** to detect **errors and anomalies** in the playlist structure.
 
-## ✨ Features
+## Features
 
-- 📡 **Downloads `.m3u8` files** dynamically from a given URL.
-- 🔍 **Validates stream integrity** using **ChatGPT (GPT-3.5 Turbo)**.
-- 🛠️ Runs ffprobe on the .ts segment to verify stream properties.
-- ⚡ **Fast & Lightweight**, built with Java + Maven.
-- 🔐 **API Key Management** via `config.properties` or environment variables.
-- 📖 **Open Source** under **Apache License 2.0**.
+- **Downloads `.m3u8` files** dynamically from a given URL.
+- **Validates stream integrity** using **ChatGPT (GPT-3.5 Turbo)**.
+- Runs ffprobe on the .ts segment to verify stream properties.
+- **Fast & Lightweight**, built with Java + Maven.
+- **API Key Management** via `config.properties` or environment variables.
+- **Open Source** under **Apache License 2.0**.
 
 ---
 
-## 🏗️ Installation & Setup
+## Installation & Setup
 
-### 1️⃣ Clone the Repository
+### Clone the Repository
 
 ```sh
 git clone https://github.com/serrss/hls-ai-analyzer.git
 cd hls-ai-analyzer
 ```
 
-### 2️⃣ Ensure Java 17+ & Maven Installed
+### Ensure Java 17+ & Maven Installed
 
 Check Java:
 
@@ -44,13 +44,13 @@ Check Maven:
 mvn -version
 ```
 
-> ⚠️ Java **17+** is required!
+> Java **17+** is required!
 
-### 3️⃣ Set Up API Key
+### Set Up API Key
 
 You **must** provide an OpenAI API key.
 
-#### Option 1️⃣: Use `config.properties`
+#### Option: Use `config.properties`
 
 Create a file **`src/main/resources/config.properties`**:
 
@@ -58,9 +58,9 @@ Create a file **`src/main/resources/config.properties`**:
 openai.api.key=sk-your-api-key-here
 ```
 
-> ⚠️ **DO NOT commit this file!** Add it to `.gitignore`.
+> **DO NOT commit this file!** Add it to `.gitignore`.
 
-#### Option 2️⃣: Use Environment Variable
+#### Option: Use Environment Variable
 
 ```sh
 export OPENAI_API_KEY="sk-your-api-key-here"
@@ -68,7 +68,7 @@ export OPENAI_API_KEY="sk-your-api-key-here"
 
 (For Windows: use `set OPENAI_API_KEY="sk-your-api-key-here"` in CMD.)
 
-### 4️⃣ Install FFmpeg (Required for ffprobe)
+### Install FFmpeg (Required for ffprobe)
 The tool requires ffprobe to analyze .ts media files.
 
 Install on macOS (via Homebrew):
@@ -84,15 +84,15 @@ Download from FFmpeg official site and add it to your system PATH.
 
 ---
 
-## 🚀 Build & Run
+## Build & Run
 
-### 1️⃣ Build the Project
+### Build the Project
 
 ```sh
 mvn clean package
 ```
 
-### 2️⃣ Run the Analyzer
+### Run the Analyzer
 
 ```sh
 java -jar target/hls-analyzer-1.0-SNAPSHOT.jar
@@ -116,27 +116,27 @@ java -jar target/hls-analyzer-1.0-SNAPSHOT.jar
 
 ---
 
-## 📜 License
+## License
 
 This project is licensed under **Apache License 2.0**.  
 See [LICENSE](https://opensource.org/licenses/Apache-2.0) for details.
 
 ---
 
-## 👨‍💻 Contributing
+## Contributing
 
-**Contributions are welcome!** 🎉 If you find a bug or have a feature request:
+**Contributions are welcome!** If you find a bug or have a feature request:
 
 1. **Fork the repository** on GitHub.
 2. **Create a feature branch** (`git checkout -b feature-new`).
 3. **Commit your changes** (`git commit -m "Add new feature"`).
 4. **Push to GitHub** (`git push origin feature-new`).
-5. **Open a Pull Request** 🚀.
+5. **Open a Pull Request**.
 
 ---
 
 ## 📬 Contact
 
-👤 **Author:** Serhii Romanov  
-📧 **Email:** sergey.romanov.kh@gmail.com  
-🌍 **GitHub:** [serrss](https://github.com/serrss)
+**Author:** Serhii Romanov  
+**Email:** sergey.romanov.kh@gmail.com  
+**GitHub:** [serrss](https://github.com/serrss)

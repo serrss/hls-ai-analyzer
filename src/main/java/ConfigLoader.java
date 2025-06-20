@@ -28,6 +28,10 @@ public class ConfigLoader {
     return properties.getProperty(key);
   }
 
+  public static String getProjectId() {
+    return getProperty("openai.project.id", "");
+  }
+
   /**
    * Get a property value with a default fallback.
    *
