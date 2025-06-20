@@ -1,4 +1,4 @@
-# HLS Analyzer via ChatGPT API 🚀
+# HLS Analyzer via ChatGPT API 
 
 [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Java](https://img.shields.io/badge/java-17+-red.svg)](https://jdk.java.net/)
